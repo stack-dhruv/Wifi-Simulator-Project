@@ -19,8 +19,9 @@ void WiFi4Simulator::runSimulation(double transmission_time) {
         double initial_backoff = (user.getId() == 0) ? 0.0 : user.randomBackoff();
         events.push({initial_backoff, user.getId()});
         user.setNextAttempt(initial_backoff);
-        std::cout << "User " << user.getId() << " initial backoff: " << initial_backoff << " ms.\n";
+        // std::cout << "User " << user.getId() << " initial backoff: " << initial_backoff << " ms.\n";
     }
+    std::cout << "-----" << std::endl;
 
     // Run simulation loop
     while (!events.empty()) {
@@ -41,7 +42,7 @@ void WiFi4Simulator::runSimulation(double transmission_time) {
             user.incrementPacketsSent();
             user.addLatency(simulation_time);
 
-            std::cout << "User " << user.getId() << " transmitted at time " << simulation_time << " ms.\n";
+            std::cout << "✅ User " << user.getId() << " transmitted at time " << simulation_time << " ms.\n";
 
             channel.release();
         } else {
@@ -49,10 +50,27 @@ void WiFi4Simulator::runSimulation(double transmission_time) {
             double backoff = user.randomBackoff();
             double retry_time = time + backoff;
 
-            std::cout << "User " << user.getId() << " backoff for " << backoff << " ms. Retry at time " << retry_time << " ms.\n";
+            std::cout << "⛔️ User " << user.getId() << " backoff for " << backoff << " ms. Retry at time " << retry_time << " ms.\n";
 
             user.setNextAttempt(retry_time);
             events.push({retry_time, user.getId()});
+        }
+
+        // Conflict Resolution: Check for conflict in same backoff times
+        if (!events.empty() && events.top().first == time) {
+            auto [conflict_time, conflict_user_id] = events.top();
+            if (conflict_time == time) {
+                // Conflict: Two users have the same backoff time
+                User& conflict_user = users[conflict_user_id];
+                double new_backoff = conflict_user.randomBackoff(); // Generate new backoff for the second user
+                double new_retry_time = time + new_backoff;
+
+                std::cout << "⛔️ User " << conflict_user.getId() << " has the same backoff as User " << user.getId() << " | New BackOff: " << new_backoff << ", (Scheduled next attempt: " << new_retry_time << "ms)\n";
+
+                conflict_user.setNextAttempt(new_retry_time);
+                events.push({new_retry_time, conflict_user.getId()});
+                events.pop(); // Remove the conflicting user from the queue temporarily
+            }
         }
     }
 
@@ -73,24 +91,17 @@ void WiFi4Simulator::calculateMetrics() {
     }
 
     // Throughput calculation considering maximum data rate (133.33 Mbps)
-    double max_throughput = 133.33; // Mbps
-    double throughput = (total_packets * 8.0 * 1024) / (simulation_time / 1000.0); // Mbps
-    throughput = std::min(throughput, max_throughput);
+    double throughput = (total_packets * 8.0 * 1024) / (simulation_time*1000); // Mbps
 
     double avg_latency = total_latency / total_packets;
 
     // Display metrics
-    std::cout << "\nSimulation Metrics:\n";
-    std::cout << "-----------------------------------\n";
-    std::cout << "Throughput: " << std::fixed << std::setprecision(2) << throughput << " Mbps\n";
-    std::cout << "Average Latency: " << avg_latency << " ms\n";
-    std::cout << "Maximum Latency: " << max_latency << " ms\n";
-    std::cout << "-----------------------------------\n";
-    std::cout << "Gantt Chart:\n";
-
-    for (const auto& user : users) {
-        std::cout << "User " << user.getId() << " completed at " << user.getTotalLatency() << " ms.\n";
-    }
-
-    std::cout << "Total Simulation Time: " << simulation_time << " ms\n";
+    std::cout << "\n| Simulation Metrics:\n";
+    std::cout << "| -----------------------------------\n";
+    std::cout << "| Throughput: " << std::fixed << std::setprecision(2) << throughput << " Mbps\n";
+    std::cout << "| Average Latency: " << avg_latency << " ms\n";
+    std::cout << "| Maximum Latency: " << max_latency << " ms\n";
+    std::cout << "| -----------------------------------\n";
+    std::cout << "| Total Simulation Time: " << simulation_time << " ms\n";
+    std::cout << "| -----------------------------------\n";
 }
