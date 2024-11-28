@@ -1,4 +1,4 @@
-#include "WiFi4Simulator.h"
+#include "Wifi4Simulator.h"
 #include <iostream>
 #include <queue>
 #include <cstdlib>
