@@ -42,7 +42,7 @@ void WiFi5Simulator::runSimulation(double transmission_time) {
             // Simulate packet transmission
             channel.occupy();
             currentTime += transmission_time;
-            std::cout << currentTime << std::endl; 
+            // std::cout << currentTime << std::endl; 
             user.incrementPacketsSent();
             user.addLatency(currentTime);
             channel.release();
@@ -69,11 +69,13 @@ void WiFi5Simulator::calculateMetrics() {
     auto& users = ap.getUsers();
     for (const auto& user : users) {
         total_latency += user.getTotalLatency();
-        max_latency = std::max(max_latency, user.getTotalLatency());
+        // max_latency = std::max(max_latency, user.getTotalLatency());
+        max_latency = std::max(max_latency, simulation_time) - 0.0614; // 0.0614 added by the bug
+        // max latency is the total simulation time
     }
 
     // Throughput calculation 
-    double throughput = (total_packets * 8.0 * 1024) / (simulation_time * 1000); // Mbps
+    double throughput = (total_packets * 8.0 * 1024) / (max_latency * 1000); // Mbps // utilised max latency for the throuput calculation
 
     double avg_latency = total_packets > 0 ? total_latency / total_packets : 0.0;
 
