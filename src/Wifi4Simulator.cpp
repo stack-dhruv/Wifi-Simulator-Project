@@ -19,8 +19,8 @@ void WiFi4Simulator::runSimulation(double transmission_time) {
         double initial_backoff = (user.getId() == 0) ? 0.0 : user.randomBackoff();
         events.push({initial_backoff, user.getId()});
         user.setNextAttempt(initial_backoff);
-        // std::cout << "User " << user.getId() << " initial backoff: " << initial_backoff << " ms.\n";
     }
+
     std::cout << "-----" << std::endl;
 
     // Run simulation loop
@@ -57,7 +57,7 @@ void WiFi4Simulator::runSimulation(double transmission_time) {
         }
 
         // Conflict Resolution: Check for conflict in same backoff times
-        if (!events.empty() && events.top().first == time) {
+        while (!events.empty() && events.top().first == time) {
             auto [conflict_time, conflict_user_id] = events.top();
             if (conflict_time == time) {
                 // Conflict: Two users have the same backoff time
@@ -65,7 +65,9 @@ void WiFi4Simulator::runSimulation(double transmission_time) {
                 double new_backoff = conflict_user.randomBackoff(); // Generate new backoff for the second user
                 double new_retry_time = time + new_backoff;
 
-                std::cout << "⛔️ User " << conflict_user.getId() << " has the same backoff as User " << user.getId() << " | New BackOff: " << new_backoff << ", (Scheduled next attempt: " << new_retry_time << "ms)\n";
+                std::cout << "⛔️ User " << conflict_user.getId() << " has the same backoff as User " << user.getId() 
+                          << " | New BackOff: " << new_backoff 
+                          << ", (Scheduled next attempt: " << new_retry_time << "ms)\n";
 
                 conflict_user.setNextAttempt(new_retry_time);
                 events.push({new_retry_time, conflict_user.getId()});
@@ -91,14 +93,14 @@ void WiFi4Simulator::calculateMetrics() {
     }
 
     // Throughput calculation considering maximum data rate (133.33 Mbps)
-    double throughput = (total_packets * 8.0 * 1024) / (simulation_time*1000); // Mbps
+    double throughput = (total_packets * 8.0 * 1024) / (simulation_time * 1000); // Mbps
 
-    double avg_latency = total_latency / total_packets;
+    double avg_latency = total_packets > 0 ? total_latency / total_packets : 0.0;
 
     // Display metrics
     std::cout << "\n| Simulation Metrics:\n";
     std::cout << "| -----------------------------------\n";
-    std::cout << "| Throughput: " << std::fixed << std::setprecision(2) << throughput << " Mbps\n";
+    std::cout << "| Throughput: " << std::fixed << std::setprecision(6) << throughput << " Mbps\n";
     std::cout << "| Average Latency: " << avg_latency << " ms\n";
     std::cout << "| Maximum Latency: " << max_latency << " ms\n";
     std::cout << "| -----------------------------------\n";
