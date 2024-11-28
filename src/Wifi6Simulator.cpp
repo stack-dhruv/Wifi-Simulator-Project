@@ -15,9 +15,6 @@ WiFi6Simulator::WiFi6Simulator(int num_users, int bandwidth)
 {}
 
 void WiFi6Simulator::runSimulation(double transmission_time) {
-    std::cout << "\n===========================================\n";
-    std::cout << "    WiFi 6 Simulator with OFDMA\n";
-    std::cout << "===========================================\n";
 
     // Ask the user for sub-channel width
     int userInputSubChannelWidth;
@@ -61,7 +58,7 @@ void WiFi6Simulator::runSimulation(double transmission_time) {
     std::vector<double> frameTimestamps;
 
     while (remainingUsers > 0) {
-        std::cout << "---: Starting Frame at " << std::fixed << std::setprecision(4) << currentTime << " ms :---\n";
+        std::cout << "\t↦ Parallel Lines opened at " << std::fixed << std::setprecision(4) << currentTime << " ms\n";
 
         int usersThisFrame = std::min(numSubChannels, remainingUsers);
         
@@ -115,26 +112,34 @@ void WiFi6Simulator::runSimulation(double transmission_time) {
 }
 
 void WiFi6Simulator::calculateMetrics(const std::vector<double>& frameTimestamps) {
-    std::cout << "\n==============================\n";
-    std::cout << "      Simulation Results\n";
-    std::cout << "==============================\n";
+    std::cout << "| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    std::cout << "| Simulation Results\n";
+    std::cout << "| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     
     // Calculate and display metrics
-    std::cout << "1. Throughput: " << std::fixed << std::setprecision(4) 
-              << calculateThroughput() << " Mbps\n";
-    std::cout << "2. Average Latency: " 
-              << calculateAverageLatency() << " ms\n";
-    std::cout << "3. Max Latency: " 
-              << calculateMaxLatency() << " ms\n";
+    // Display metrics
+    std::cout << "\n| WiFi 5 Simulation Metrics:\n";
+    std::cout << "| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    std::cout << "| Throughput: " << std::fixed << std::setprecision(6) << calculateThroughput() << " Mbps\n";
+    std::cout << "| Average Latency: " << calculateAverageLatency() << " ms\n";
+    std::cout << "| Maximum Latency: " << calculateMaxLatency() << " ms\n";
+    std::cout << "| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+
+    // std::cout << "1. Throughput: " << std::fixed << std::setprecision(4) 
+    //           << calculateThroughput() << " Mbps\n";
+    // std::cout << "2. Average Latency: " 
+    //           << calculateAverageLatency() << " ms\n";
+    // std::cout << "3. Max Latency: " 
+    //           << calculateMaxLatency() << " ms\n";
 
     // Timestamps for transmission verification
-    std::cout << "\n---: Timestamps of successful transmissions :---\n";
+    std::cout << "\nUsers transmissions\n";
     for (size_t i = 0; i < frameTimestamps.size(); ++i) {
-        std::cout << "Event " << i+1 << ": " 
+        std::cout << "User " << i+1 << " transmitted at " 
                   << std::fixed << std::setprecision(4) 
                   << frameTimestamps[i] << " ms\n";
     }
-    std::cout << "===============================\n";
+    std::cout << "| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 }
 
 double WiFi6Simulator::calculateThroughput() {

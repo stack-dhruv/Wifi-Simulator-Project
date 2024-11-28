@@ -6,12 +6,23 @@ using namespace std;
 
 void printMenu()
 {
-    cout << "\n| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ |\n";
-    cout << "| \t WiFi 4/5 Simulator    |\n";
-    cout << "| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ |\n";
+    std::string message = "Wifi 4/5/6 Simulator";
+    int width = message.length() + 2; // +2 for the borders
+
+    std::cout << "+";
+    for (int i = 0; i < width; ++i)
+        std::cout << "-";
+    std::cout << "+" << std::endl;
+
+    std::cout << "| " << message << " |" << std::endl;
+
+    std::cout << "+";
+    for (int i = 0; i < width; ++i)
+        std::cout << "-";
+    std::cout << "+" << std::endl;
     cout << "| 1. Run WiFi 4 Simulation     |\n";
     cout << "| 2. Run WiFi 5 Simulation     |\n";
-    cout << "| 3. Run WiFi 5 Simulation     |\n";
+    cout << "| 3. Run WiFi 6 Simulation     |\n";
     cout << "| 0. ❌ Exit \n";
     cout << "| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ |\n";
 }
@@ -33,6 +44,20 @@ int main()
 
         if (choice == 1)
         {
+            std::string message = "Wifi 4 Simulator";
+            int width = message.length() + 2; // +2 for the borders
+
+            std::cout << "+";
+            for (int i = 0; i < width; ++i)
+                std::cout << "-";
+            std::cout << "+" << std::endl;
+
+            std::cout << "| " << message << " |" << std::endl;
+
+            std::cout << "+";
+            for (int i = 0; i < width; ++i)
+                std::cout << "-";
+            std::cout << "+" << std::endl;
             cout << "↦ Enter the number of users: ";
             cin >> num_users;
 
@@ -41,6 +66,20 @@ int main()
         }
         else if (choice == 2)
         {
+            std::string message = "Wifi 5 Simulator";
+            int width = message.length() + 2; // +2 for the borders
+
+            std::cout << "+";
+            for (int i = 0; i < width; ++i)
+                std::cout << "-";
+            std::cout << "+" << std::endl;
+
+            std::cout << "| " << message << " |" << std::endl;
+
+            std::cout << "+";
+            for (int i = 0; i < width; ++i)
+                std::cout << "-";
+            std::cout << "+" << std::endl;
             cout << "Enter the number of users: ";
             cin >> num_users;
 
@@ -52,6 +91,20 @@ int main()
         }
         else if (choice == 3)
         {
+            std::string message = "Wifi 6 Simulator";
+            int width = message.length() + 2; // +2 for the borders
+
+            std::cout << "+";
+            for (int i = 0; i < width; ++i)
+                std::cout << "-";
+            std::cout << "+" << std::endl;
+
+            std::cout << "| " << message << " |" << std::endl;
+
+            std::cout << "+";
+            for (int i = 0; i < width; ++i)
+                std::cout << "-";
+            std::cout << "+" << std::endl;
             cout << "Enter the number of users for WiFi 6 Simulation: ";
             cin >> num_users;
             WiFi6Simulator sim6(num_users); // Default bandwidth of 20 MHz

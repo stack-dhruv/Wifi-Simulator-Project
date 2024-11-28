@@ -16,6 +16,8 @@ WiFi5Simulator::WiFi5Simulator(int num_users, int packets_per_user)
 }
 
 void WiFi5Simulator::runSimulation(double transmission_time) {
+    
+
     auto& users = ap.getUsers();
     auto& channel = ap.getChannel();
     int round = 0;
