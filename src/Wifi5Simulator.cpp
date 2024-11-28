@@ -18,12 +18,14 @@ WiFi5Simulator::WiFi5Simulator(int num_users, int packets_per_user)
 void WiFi5Simulator::runSimulation(double transmission_time) {
     auto& users = ap.getUsers();
     auto& channel = ap.getChannel();
+    int round = 0;
 
     // Simulate multi-user MIMO communication process
     double currentTime = 0.0;
-    int currentUser = 0;
+    int currentUser = 0; 
 
     while (packetsSent < totalPackets) {
+        // Begin transmission
         // Broadcast packet by access point
         currentTime += broadcastTime;
 
@@ -31,10 +33,13 @@ void WiFi5Simulator::runSimulation(double transmission_time) {
         for (auto& user : users) {
             currentTime += csiTime;
         }
+        // SETUP_TIME = BROADCAST_TIME + CURRENT_TIME
 
         // Parallel transmission window
         int packetsInThisWindow = std::min(totalPackets - packetsSent, 
-                                           static_cast<int>(std::ceil((timeSlot * 133.33) / (transmission_time * 8))));
+                                           static_cast<int>(std::ceil((timeSlot) / (transmission_time))));
+        
+        std::cout << "\n----------------\nNew window open: (Remaining packets)" << packetsInThisWindow << "\n----------------\n" << std::endl; 
 
         for (int i = 0; i < packetsInThisWindow; ++i) {
             User& user = users[currentUser];
@@ -42,6 +47,7 @@ void WiFi5Simulator::runSimulation(double transmission_time) {
             // Simulate packet transmission
             channel.occupy();
             currentTime += transmission_time;
+            std::cout << currentUser << " transmitted packet " << user.getPacketsSent()+1 <<" at "<< currentTime << std::endl;
             user.incrementPacketsSent();
             user.addLatency(currentTime);
             channel.release();
@@ -50,6 +56,9 @@ void WiFi5Simulator::runSimulation(double transmission_time) {
             
             // Round-robin scheduling
             currentUser = (currentUser + 1) % users.size();
+            if(currentUser==0 && totalPackets - packetsSent > 0) {
+                std::cout << "\n↳ Round robin: ROUND No. " << ++round << "\n";
+            }
         }
 
         // Move to next cycle
@@ -80,9 +89,9 @@ void WiFi5Simulator::calculateMetrics() {
 
     // Display metrics
     std::cout << "\n| WiFi 5 Simulation Metrics:\n";
-    std::cout << "| -----------------------------------\n";
+    std::cout << "| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     std::cout << "| Throughput: " << std::fixed << std::setprecision(6) << throughput << " Mbps\n";
     std::cout << "| Average Latency: " << avg_latency << " ms\n";
     std::cout << "| Maximum Latency: " << max_latency << " ms\n";
-    std::cout << "| -----------------------------------\n";
+    std::cout << "| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
 }

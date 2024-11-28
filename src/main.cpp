@@ -4,13 +4,13 @@
 using namespace std;
 
 void printMenu() {
-    cout << "\n| --------------------------\n";
-    cout << "| WiFi 4/5 Simulator\n";
-    cout << "| --------------------------\n";
-    cout << "| 1. Run WiFi 4 Simulation\n";
-    cout << "| 2. Run WiFi 5 Simulation\n";
+    cout << "\n| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ |\n";
+    cout << "| \t WiFi 4/5 Simulator    |\n";
+    cout << "| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ |\n";
+    cout << "| 1. Run WiFi 4 Simulation     |\n";
+    cout << "| 2. Run WiFi 5 Simulation     |\n";
     cout << "| 0. ❌ Exit \n";
-    cout << "--------------------------\n";
+    cout << "| ~~~~~~~~~~~~~~~~~~~~~~~~~~~~ |\n";
 }
 
 int main() {
@@ -21,11 +21,11 @@ int main() {
 
     while (true) {
         printMenu();
-        cout << "Enter your choice: ";
+        cout << "| Enter your choice: ";
         cin >> choice;
 
         if (choice == 1) {
-            cout << "Enter the number of users: ";
+            cout << "↦ Enter the number of users: ";
             cin >> num_users;
 
             WiFi4Simulator sim(num_users);

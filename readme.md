@@ -1,5 +1,9 @@
 # Project
 
+## Question 2
+
+
+
 ## Question 1
 
 **(Q)** WiFi 4 Communication WiFi communication happens via a single access point and a set of users. A single transmission consists of sniffing of the channel, and transmission of the data packet if the channel is free. If the channel is not free, the transmission is deferred by a random unit of time (subject to a maximum limit of backoff time), followed by repetition of the above process. Simulate this above process of transmission to find out the throughput, average and maximum latency if a total of (i) 1 user and 1 AP is communicating, (ii) 10 users and 1 AP is communicating, and (iii) 100 users and 1 AP are communicating. You may assume that a total of 20 MHz being used as bandwidth, modulation of 256-QAM and coding rate of 5/6 is used for transmission and that each packet has size of 1 KB. You may ignore the other periods of time wastage such as DIFS, CIFS and guard intervals.
