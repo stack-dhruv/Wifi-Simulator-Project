@@ -1,7 +1,7 @@
 #ifndef WIFI4SIMULATOR_H
 #define WIFI4SIMULATOR_H
 
-#include "WiFiSimulator.h"
+#include "WifiSimulator.h"
 
 class WiFi4Simulator : public WiFiSimulator {
 public:

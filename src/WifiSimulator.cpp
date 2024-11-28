@@ -1,4 +1,4 @@
-#include "WiFiSimulator.h"
+#include "WifiSimulator.h"
 #include <iostream>
 #include <numeric>
 #include <iomanip>

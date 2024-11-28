@@ -1,12 +1,18 @@
 # Project
 
+## Question 3
+
+WiFi 6 Communication WiFi 6 allowed a yet new type of communication, using OFDMA. In this case, a second type of parallel transmission was allowed, where the 20 MHz channel could be further subdivided into units of 2 MHz, 4 MHz or 10 MHz, and each of these sub-channels could be utilized in parallel for a total of 5ms. After 5ms, the channel allocation is done once again. Again, find out the throughput, average and maximum latency in each of the above cases, using a process of round-robin scheduling of the users.
+
+## Question 2
+
+WiFi 5 Communication WiFi 5 allowed a new type of communication, using multi-user MIMO. In this case, parallel transmission was allowed. However, parallel communication could be done only after (i) a single broadcast packet was sent by the access point, and (ii) each user would sequentially send their channel state information, which would be a single packet of 200 bytes. Once this was done, each user could communicate in parallel for a total of 15 ms. After 15 ms, the above process is repeated. Find out the throughput, average and maximum latency in each of the above cases once again, assuming round-robin scheduling of the users.
+
 ## Question 1
 
 **(Q)** WiFi 4 Communication WiFi communication happens via a single access point and a set of users. A single transmission consists of sniffing of the channel, and transmission of the data packet if the channel is free. If the channel is not free, the transmission is deferred by a random unit of time (subject to a maximum limit of backoff time), followed by repetition of the above process. Simulate this above process of transmission to find out the throughput, average and maximum latency if a total of (i) 1 user and 1 AP is communicating, (ii) 10 users and 1 AP is communicating, and (iii) 100 users and 1 AP are communicating. You may assume that a total of 20 MHz being used as bandwidth, modulation of 256-QAM and coding rate of 5/6 is used for transmission and that each packet has size of 1 KB. You may ignore the other periods of time wastage such as DIFS, CIFS and guard intervals.
 
 Let's start fresh, start coding the structure for the below things. Design of class structure, modeling of access point, user, packet, frequency channel is a must.
-
-FrequencyChannel class should contain bandwidth and 
 
 1. Data Rate (R):
     - The data rate in WiFi is determined using the formula: $R=Bandwidth×log_2(M)×Coding Rate$
@@ -62,12 +68,14 @@ Ignore this, I did this for fun...
 ## Grading criteria
 
 Grading criteria:
--> Design of class structure, modeling of access point, user, packet, frequency channel is a must.
--> Proper functioning of each class
--> Use of appropriate data structure
--> Modeling of CSMA/CA
--> Computation of throughput, average and maximum latency in each case
--> Additional cases of code cleanliness, such as use of Makefile (both for building library and test program), git commits and proper function/variable names.
--> Extra functionality based on the student’s understanding.
--> The C++ program sources. Templates and exception handling must be utilized.
--> Makefile to compile the sources and generate the running binary for the shell. The Makefile should generate two versions of the binary – one for debugging and another for optimized execution.
+
+- Design of class structure, modeling of access point, user, packet, frequency channel is a must.
+- Proper functioning of each class
+- Use of appropriate data structure
+- Modeling of CSMA/CA
+- Computation of throughput, average and maximum latency in each case
+- Additional cases of code cleanliness, such as use of Makefile (both for building library and test program), git commits and proper function/variable names.
+- Extra functionality based on the student’s understanding.
+- The C++ program sources. Templates and exception handling must be utilized.
+- Makefile to compile the sources and generate the running binary for the shell. The Makefile should generate two versions of the binary – one for debugging and another for optimized execution.
+
