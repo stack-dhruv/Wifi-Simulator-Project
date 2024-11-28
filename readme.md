@@ -6,8 +6,6 @@
 
 Let's start fresh, start coding the structure for the below things. Design of class structure, modeling of access point, user, packet, frequency channel is a must.
 
-FrequencyChannel class should contain bandwidth and 
-
 1. Data Rate (R):
     - The data rate in WiFi is determined using the formula: $R=Bandwidth×log_2(M)×Coding Rate$
     - $R = (20 * 10^6) * 8 * (5/6) = 133.33 \text{Mbps}$
@@ -62,12 +60,13 @@ Ignore this, I did this for fun...
 ## Grading criteria
 
 Grading criteria:
--> Design of class structure, modeling of access point, user, packet, frequency channel is a must.
--> Proper functioning of each class
--> Use of appropriate data structure
--> Modeling of CSMA/CA
--> Computation of throughput, average and maximum latency in each case
--> Additional cases of code cleanliness, such as use of Makefile (both for building library and test program), git commits and proper function/variable names.
--> Extra functionality based on the student’s understanding.
--> The C++ program sources. Templates and exception handling must be utilized.
--> Makefile to compile the sources and generate the running binary for the shell. The Makefile should generate two versions of the binary – one for debugging and another for optimized execution.
+
+- Design of class structure, modeling of access point, user, packet, frequency channel is a must.
+- Proper functioning of each class
+- Use of appropriate data structure
+- Modeling of CSMA/CA
+- Computation of throughput, average and maximum latency in each case
+- Additional cases of code cleanliness, such as use of Makefile (both for building library and test program), git commits and proper function/variable names.
+- Extra functionality based on the student’s understanding.
+- The C++ program sources. Templates and exception handling must be utilized.
+- Makefile to compile the sources and generate the running binary for the shell. The Makefile should generate two versions of the binary – one for debugging and another for optimized execution.
