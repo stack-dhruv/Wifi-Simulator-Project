@@ -1,8 +1,12 @@
 # Project
 
+## Question 3
+
+WiFi 6 Communication WiFi 6 allowed a yet new type of communication, using OFDMA. In this case, a second type of parallel transmission was allowed, where the 20 MHz channel could be further subdivided into units of 2 MHz, 4 MHz or 10 MHz, and each of these sub-channels could be utilized in parallel for a total of 5ms. After 5ms, the channel allocation is done once again. Again, find out the throughput, average and maximum latency in each of the above cases, using a process of round-robin scheduling of the users.
+
 ## Question 2
 
-
+WiFi 5 Communication WiFi 5 allowed a new type of communication, using multi-user MIMO. In this case, parallel transmission was allowed. However, parallel communication could be done only after (i) a single broadcast packet was sent by the access point, and (ii) each user would sequentially send their channel state information, which would be a single packet of 200 bytes. Once this was done, each user could communicate in parallel for a total of 15 ms. After 15 ms, the above process is repeated. Find out the throughput, average and maximum latency in each of the above cases once again, assuming round-robin scheduling of the users.
 
 ## Question 1
 

@@ -23,11 +23,8 @@ void WiFi5Simulator::runSimulation(double transmission_time) {
     // Simulate multi-user MIMO communication process
     double currentTime = 0.0;
     int currentUser = 0; 
-
+    currentTime += broadcastTime;
     while (packetsSent < totalPackets) {
-        // Begin transmission
-        // Broadcast packet by access point
-        currentTime += broadcastTime;
 
         // Channel State Information (CSI) collection
         for (auto& user : users) {
@@ -37,9 +34,9 @@ void WiFi5Simulator::runSimulation(double transmission_time) {
 
         // Parallel transmission window
         int packetsInThisWindow = std::min(totalPackets - packetsSent, 
-                                           static_cast<int>(std::ceil((timeSlot) / (transmission_time))));
+                                           static_cast<int>(std::floor((timeSlot) / (transmission_time))));
         
-        std::cout << "\n----------------\nNew window open: (Remaining packets)" << packetsInThisWindow << "\n----------------\n" << std::endl; 
+        std::cout << "\n----------------\nNew window open: (Remaining packets)" << packetsInThisWindow << " << | CSI Time: "<< currentTime << "\n----------------\n" << std::endl; 
 
         for (int i = 0; i < packetsInThisWindow; ++i) {
             User& user = users[currentUser];
