@@ -42,7 +42,6 @@ void WiFi5Simulator::runSimulation(double transmission_time) {
             // Simulate packet transmission
             channel.occupy();
             currentTime += transmission_time;
-            // std::cout << currentTime << std::endl; 
             user.incrementPacketsSent();
             user.addLatency(currentTime);
             channel.release();
@@ -85,7 +84,5 @@ void WiFi5Simulator::calculateMetrics() {
     std::cout << "| Throughput: " << std::fixed << std::setprecision(6) << throughput << " Mbps\n";
     std::cout << "| Average Latency: " << avg_latency << " ms\n";
     std::cout << "| Maximum Latency: " << max_latency << " ms\n";
-    std::cout << "| -----------------------------------\n";
-    std::cout << "| Total Simulation Time: " << simulation_time << " ms\n";
     std::cout << "| -----------------------------------\n";
 }

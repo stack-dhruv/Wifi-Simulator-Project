@@ -5,11 +5,11 @@ using namespace std;
 
 void printMenu() {
     cout << "\n| --------------------------\n";
-    cout << "| WiFi 4/5 Simulator 🖧\n";
+    cout << "| WiFi 4/5 Simulator\n";
     cout << "| --------------------------\n";
-    cout << "| 1. Run WiFi 4 Simulation 🚀\n";
-    cout << "| 2. Run WiFi 5 Simulation 🚀\n";
-    cout << "| 0. Exit ❌\n";
+    cout << "| 1. Run WiFi 4 Simulation\n";
+    cout << "| 2. Run WiFi 5 Simulation\n";
+    cout << "| 0. ❌ Exit \n";
     cout << "--------------------------\n";
 }
 
