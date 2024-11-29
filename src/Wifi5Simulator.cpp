@@ -38,7 +38,7 @@ void WiFi5Simulator::runSimulation(double transmission_time) {
         int packetsInThisWindow = std::min(totalPackets - packetsSent, 
                                            static_cast<int>(std::floor((timeSlot) / (transmission_time))));
         
-        std::cout << "\n----------------\nNew window open: (Remaining packets)" << packetsInThisWindow << " << | CSI Time: "<< currentTime << "\n----------------\n" << std::endl; 
+        std::cout << "\n----------------\nNew window open: (Remaining packets = " << packetsInThisWindow << ") | CSI Time: "<< currentTime << "\n----------------\n" << std::endl; 
 
         for (int i = 0; i < packetsInThisWindow; ++i) {
             User& user = users[currentUser];

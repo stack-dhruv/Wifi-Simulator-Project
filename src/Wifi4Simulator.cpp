@@ -4,6 +4,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <iomanip>
+#include "DisplayParser.h"
 
 WiFi4Simulator::WiFi4Simulator(int num_users) : WiFiSimulator(num_users) {}
 
@@ -96,6 +97,7 @@ void WiFi4Simulator::calculateMetrics() {
     double throughput = (total_packets * 8.0 * 1024) / (simulation_time * 1000); // Mbps
 
     double avg_latency = total_packets > 0 ? total_latency / total_packets : 0.0;
+    DisplayParser<int> displayInt;
 
     // Display metrics
     std::cout << "\n| Simulation Metrics:\n";
