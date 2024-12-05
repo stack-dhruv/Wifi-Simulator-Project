@@ -1,4 +1,97 @@
 # Project
+Your provided Makefile is well-structured and adheres to the goal of generating two versions of the binary: one for debugging and another for optimized execution. Here's how it works step by step:
+
+---
+
+### **Steps to Use the Makefile**
+
+1. **Run the Setup Script**
+   - The `setup` rule ensures that the `setup.sh` script is executed before building the binaries. The script is made executable and then executed.
+
+2. **Build Debug and Optimized Binaries**
+   - **Debug Version (`wifi_simulator_debug`)**: Compiles the sources with debugging flags (`-g`, `-DDEBUG`) to facilitate debugging.
+   - **Optimized Version (`wifi_simulator_opt`)**: Compiles the sources with optimization flags (`-O3`) for performance.
+   - Both binaries are placed in the `bin/` directory.
+
+3. **Generate a Shared Library**
+   - Creates a shared library `libwifi_simulator.so` in the `lib/` directory, using the compiled object files.
+
+4. **Clean Build Files**
+   - Removes all compiled object files, binaries, and libraries to ensure a clean rebuild.
+
+5. **Dynamic Targets**
+   - The `print-%` rule allows for debugging Makefile variables by printing their values.
+
+6. **Directories**
+   - Ensures that the `build/`, `bin/`, and `lib/` directories exist before the build starts.
+
+---
+
+### **Running Commands**
+
+#### 1. **Build All (Default Target)**
+
+```bash
+make
+```
+
+This builds both the debug and optimized binaries, as well as the shared library.
+
+---
+
+#### 2. **Build Only Debug Version**
+
+```bash
+make $(BINDIR)/wifi_simulator_debug
+```
+
+This command builds only the debug binary and the shared library.
+
+---
+
+#### 3. **Build Only Optimized Version**
+
+```bash
+make $(BINDIR)/wifi_simulator_opt
+```
+
+This command builds only the optimized binary and the shared library.
+
+---
+
+#### 4. **Clean Build Files**
+
+```bash
+make clean
+```
+
+This removes all object files, binaries, and the shared library.
+
+---
+
+#### 5. **Print Variable Values**
+
+For debugging Makefile variables, use:
+
+```bash
+make print-VARIABLE_NAME
+```
+
+For example, to print the `SOURCES` variable:
+
+```bash
+make print-SOURCES
+```
+
+---
+
+### **Key Highlights**
+
+- **Portability**: Using `@mkdir -p` ensures that directory creation works across environments without error if the directories already exist.
+
+- **Shared Library**: Generates a `.so` file, making the project reusable as a dynamic library.
+
+- **Dynamic Dependency Resolution**: The object files are created dynamically for every source file in the `src/` directory.
 
 ## Question 3
 
